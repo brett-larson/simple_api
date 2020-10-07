@@ -1,3 +1,13 @@
+"""
+    Author: Brett Larson
+    Date: 2020/10/07
+
+    Description:
+        This Python file utilizes Flask to start a simple API server that can receive GET and POST
+        HTTP requests. It returns JSON data based on the type of request.
+"""
+
+# Required imports
 from flask import Flask, jsonify, request
 from server_functions import *
 

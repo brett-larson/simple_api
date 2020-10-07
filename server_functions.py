@@ -1,6 +1,15 @@
+"""
+    Author: Brett Larson
+    Date: 2020/10/07
+
+    Description:
+        This Python file acts as the back-end server of the credit card processing application. It
+        receives data from the API server, sends it to the processing vendor for approval, and then
+        returns the appropriate data to the API server.
+"""
+
 # required imports
-import random
-import string
+from credit_card_processor import *
 
 
 def get_authorization(data_dict):
@@ -50,33 +59,6 @@ def build_decline_dict(approval, card_num):
                     "last_four_card_number": card_num}
 
     return decline_dict
-
-
-def approve_deny_transaction(data_dict):
-    """
-    This function approves transactions with a purchase value of less than 200 and greater than 0.
-    :param data_dict: JSON PUT data stored in a dictionary
-    :return: string "approve" or "decline"
-    """
-    approval = 'approve'
-
-    amount = int(data_dict.get('purchase_amt'))
-
-    if amount >= 200 or amount <= 0:
-        approval = 'decline'
-
-    return approval
-
-
-def get_authorization_code():
-    """
-    Create an authorization code through the creation of a string of random letters and numbers
-    :return: string authorization code
-    """
-    letters_numbers = string.ascii_letters + string.digits
-    authorization_code = ''.join((random.choice(letters_numbers) for i in range(10)))
-
-    return authorization_code
 
 
 def mask_credit_card(data_dict):
