@@ -11,6 +11,10 @@
 from flask import Flask, jsonify, request
 from credit_card_processor import *
 import json
+from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+f = Fernet(key)
 
 # Initiate the Flask application
 app = Flask(__name__)
@@ -31,4 +35,4 @@ def process_payment():
 
 # Run the Flask server
 if __name__ == '__main__':
-    app.run(debug=True, port=80)
+    app.run(ssl_context='adhoc', debug=True, port=5000)
