@@ -9,7 +9,8 @@
 
 # Required imports
 from flask import Flask, jsonify, request
-from server_functions import *
+from credit_card_processor import *
+import json
 
 # Initiate the Flask application
 app = Flask(__name__)
@@ -19,12 +20,12 @@ app = Flask(__name__)
 @app.route("/payment", methods=["POST", "GET"])
 def process_payment():
     if request.method == 'POST':
-        json_data = request.get_json()
-        decision_dict = get_authorization(json_data)
-        return jsonify(decision_dict), 201
+        data_dict = request.get_json()
+        json_data = json.dumps(data_dict)
+        authorization = json.loads(authorize_transaction(json_data))
+        return jsonify(authorization), 201
     elif request.method == 'GET':
-        get_request_dict = {"GET Request": "Successful",
-                            "Return": "JSON Packet"}
+        get_request_dict = {"GET Request": "Successful", "Return": "JSON Packet"}
         return jsonify(get_request_dict), 201
 
 
