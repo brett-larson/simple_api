@@ -15,7 +15,7 @@ import json
 
 
 def authorize_transaction(json_data):
-    """
+    """Authorize Credit Card Transaction
     This function represents the credit card vendor. It takes data received from the API server,
     and calls additional functions to approve or decline a transaction. It builds a new JSON
     object to send back to the server.
@@ -39,7 +39,7 @@ def authorize_transaction(json_data):
 
 
 def approve_deny_transaction(data_dict):
-    """
+    """Approve or Deny the Transaction
     This function approves transactions with a purchase value of less than or equal to 200 and
     greater than 0.
     :param data_dict: JSON POST data stored in a dictionary
@@ -56,7 +56,7 @@ def approve_deny_transaction(data_dict):
 
 
 def get_authorization_code():
-    """
+    """Create the Authorization Code
     Create an authorization code through the creation of a string of random letters and numbers
     :return: string authorization code
     """
@@ -67,7 +67,7 @@ def get_authorization_code():
 
 
 def mask_credit_card(data_dict):
-    """
+    """Mask the Credit Card Number
     Take the credit card number provided by the user, and truncate it to the last four numbers.
     :param data_dict: Dictionary provided by the customer
     :return: String containing the last four digits of the credit card number
@@ -80,7 +80,7 @@ def mask_credit_card(data_dict):
 
 
 def build_approval_dict(approval, auth_code, card_num):
-    """
+    """Create the "Approved" Dictionary
     Function that builds the dictionary when a card is approved.
     :param approval: approval status (should always be "approved" for this function)
     :param auth_code: generated authorization code
@@ -96,8 +96,8 @@ def build_approval_dict(approval, auth_code, card_num):
 
 
 def build_decline_dict(approval, card_num):
-    """
-    Function that builds the dictionary when a card is approved.
+    """Create the "Declined" Dictionary
+    Function that builds the dictionary when a card is declined.
     :param approval: approval status (should always be "decline" for this function)
     :param card_num: Last four digits of the credit card number
     :return: dictionary with decline data
